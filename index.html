@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FSOCIETY HOSTING - Free Website Hosting Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #e1e8ed;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #667eea, #764ba2, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            color: #b8c6db;
+            margin-bottom: 0.5rem;
+        }
+
+        .header .description {
+            font-size: 1rem;
+            opacity: 0.7;
+            color: #9aa5b1;
+            font-style: italic;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .deploy-section {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .deploy-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            backdrop-filter: blur(15px);
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .deploy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border-color: rgba(102, 126, 234, 0.5);
+        }
+
+        .deploy-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .deploy-card p {
+            margin-bottom: 2rem;
+            opacity: 0.8;
+            color: #b8c6db;
+            font-size: 1.1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.75rem;
+            color: #667eea;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #e1e8ed;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .form-control::placeholder {
+            color: #6c7b7f;
+        }
+
+        textarea.form-control {
+            min-height: 200px;
+            resize: vertical;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:disabled {
+            background: #6c7b7f;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .file-upload {
+            display: none;
+        }
+
+        .file-upload-label {
+            display: inline-block;
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            border: 2px dashed rgba(102, 126, 234, 0.5);
+            padding: 3rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            border-radius: 15px;
+            font-size: 1.1rem;
+        }
+
+        .file-upload-label:hover {
+            background: rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .progress {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            overflow: hidden;
+            display: none;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .sites-section {
+            margin-top: 4rem;
+        }
+
+        .sites-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .sites-header h2 {
+            color: #667eea;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .sites-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .site-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .site-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .site-card h4 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .site-url {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            text-decoration: none;
+            word-break: break-all;
+            display: block;
+            margin: 1rem 0;
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .site-url:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: scale(1.02);
+        }
+
+        .site-meta {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 1rem;
+            color: #b8c6db;
+        }
+
+        .site-actions {
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-small {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.9rem;
+        }
+
+        .btn-danger {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: #fff;
+        }
+
+        .btn-danger:hover {
+            background: linear-gradient(45deg, #c0392b, #a93226);
+        }
+
+        .alert {
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 1px solid;
+            display: none;
+        }
+
+        .alert-success {
+            background: rgba(39, 174, 96, 0.1);
+            border-color: #27ae60;
+            color: #27ae60;
+            border-radius: 10px;
+        }
+
+        .alert-error {
+            background: rgba(231, 76, 60, 0.1);
+            border-color: #e74c3c;
+            color: #e74c3c;
+            border-radius: 10px;
+        }
+
+        .terminal {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+            min-height: 120px;
+            overflow-y: auto;
+            max-height: 200px;
+            backdrop-filter: blur(10px);
+        }
+
+        .terminal-line {
+            margin: 0.5rem 0;
+            color: #b8c6db;
+            font-size: 0.9rem;
+        }
+
+        .terminal-prompt:before {
+            content: '$ ';
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .generated-url {
+            background: rgba(39, 174, 96, 0.1);
+            border: 1px solid #27ae60;
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+            display: none;
+        }
+
+        .generated-url .url-label {
+            color: #27ae60;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .generated-url .url-link {
+            color: #667eea;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            word-break: break-all;
+        }
+
+        .generated-url .url-link:hover {
+            text-decoration: underline;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            border-right: 1px solid rgba(102, 126, 234, 0.3);
+            backdrop-filter: blur(20px);
+            transition: left 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .sidebar.open {
+            left: 0;
+        }
+
+        .sidebar-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1001;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .sidebar-header {
+            padding: 2rem 1.5rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-header h3 {
+            color: #667eea;
+            margin: 0;
+            font-size: 1.3rem;
+        }
+
+        .sidebar-nav {
+            padding: 1rem 0;
+        }
+
+        .nav-item {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-item:hover {
+            background: rgba(102, 126, 234, 0.1);
+            border-left-color: #667eea;
+        }
+
+        .nav-item.active {
+            background: rgba(102, 126, 234, 0.2);
+            border-left-color: #667eea;
+        }
+
+        .nav-item i {
+            margin-right: 0.8rem;
+            color: #667eea;
+        }
+
+        .admin-login {
+            padding: 2rem 1.5rem;
+            display: none;
+        }
+
+        .admin-panel {
+            padding: 2rem 1.5rem;
+            display: none;
+        }
+        
+        .page-content {
+            padding: 2rem 1.5rem;
+        }
+        
+        .contact-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+        
+        .contact-card h5 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .contact-info {
+            margin-top: 1rem;
+        }
+        
+        .contact-info div {
+            margin: 0.5rem 0;
+            color: #b8c6db;
+        }
+        
+        .project-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 0.5rem 0;
+        }
+        
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-name {
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .project-type {
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+        
+        .project-meta {
+            font-size: 0.9rem;
+            color: #b8c6db;
+            margin: 0.5rem 0;
+        }
+        
+        .project-actions {
+            margin-top: 0.8rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .btn-small {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+        }
+        
+        .btn-danger {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            margin-top: 0.5rem;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .preview-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90vw;
+            height: 80vh;
+            background: rgba(0, 0, 0, 0.95);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 15px;
+            z-index: 1002;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .preview-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .preview-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .preview-content {
+            flex: 1;
+            padding: 1rem;
+            overflow: auto;
+        }
+
+        .preview-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 8px;
+            background: white;
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-logo {
+            font-size: 3rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #667eea, #764ba2, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(102, 126, 234, 0.3);
+            border-top-color: #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .john-reese-animation {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .john-reese-animation.show {
+            opacity: 1;
+        }
+
+        .john-reese-avatar {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            box-shadow: 0 0 50px rgba(102, 126, 234, 0.5);
+            animation: johnReesePulse 2s ease-in-out;
+        }
+
+        .john-reese-text {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 1.5rem;
+            color: #667eea;
+            font-weight: bold;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        .btn-preview {
+            background: linear-gradient(45deg, #2196F3, #21CBF3);
+            margin-left: 1rem;
+        }
+
+        .btn-preview:hover {
+            background: linear-gradient(45deg, #1976D2, #0097A7);
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes johnReesePulse {
+            0% { transform: scale(0.8); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #6c7b7f;
+        }
+
+        .footer strong {
+            color: #667eea;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .deploy-section {
+                grid-template-columns: 1fr;
+            }
+
+            .sites-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-logo">FSOCIETY</div>
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- John Reese Animation -->
+    <div class="john-reese-animation" id="john-reese-animation">
+        <div class="john-reese-avatar">🤵</div>
+        <div class="john-reese-text">Welcome to FSOCIETY</div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>FSOCIETY PANEL</h3>
+        </div>
+        <div class="sidebar-nav">
+            <div class="nav-item" id="nav-home">
+                <i>🏠</i> Home
+            </div>
+            <div class="nav-item" id="nav-admin">
+                <i>⚙️</i> Admin Panel
+            </div>
+            <div class="nav-item" id="nav-about">
+                <i>ℹ️</i> About
+            </div>
+            <div class="nav-item" id="nav-credits">
+                <i>👤</i> Credits
+            </div>
+        </div>
+        
+        <!-- Admin Login -->
+        <div class="admin-login" id="admin-login">
+            <h4>Admin Login</h4>
+            <div class="login-form">
+                <input type="text" id="admin-username" class="form-control" placeholder="Username">
+                <input type="password" id="admin-password" class="form-control" placeholder="Password">
+                <button type="button" class="btn" id="login-btn">Login</button>
+            </div>
+        </div>
+        
+        <!-- Admin Panel -->
+        <div class="admin-panel" id="admin-panel">
+            <div class="admin-section" id="admin-dashboard">
+                <h4>Dashboard Analytics</h4>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-sites">0</div>
+                        <div class="stat-label">Total Sites</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-uploads">0</div>
+                        <div class="stat-label">File Uploads</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-codes">0</div>
+                        <div class="stat-label">Code Projects</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-urls">0</div>
+                        <div class="stat-label">URL Imports</div>
+                    </div>
+                </div>
+                <button type="button" class="btn" id="view-projects-btn">View All Projects</button>
+                <button type="button" class="btn" id="logout-btn" style="background: #e74c3c; margin-top: 0.5rem;">Logout</button>
+            </div>
+            
+            <div class="admin-section" id="projects-management" style="display: none;">
+                <h4>Projects Management</h4>
+                <div id="projects-list"></div>
+                <button type="button" class="btn" id="back-to-dashboard">Back to Dashboard</button>
+            </div>
+        </div>
+        
+        <!-- About Page -->
+        <div class="page-content" id="about-page" style="display: none;">
+            <h4>About FSOCIETY HOSTING</h4>
+            <p>FSOCIETY HOSTING is a powerful web hosting platform that allows you to deploy websites instantly. Upload your files, paste your code, or import from any URL to get your website live in seconds.</p>
+            <br>
+            <p>Features:</p>
+            <ul style="margin-left: 1rem; color: #b8c6db;">
+                <li>Instant deployment from files, code, or URLs</li>
+                <li>Preview functionality before deployment</li>
+                <li>Admin panel for project management</li>
+                <li>Real-time analytics and statistics</li>
+                <li>Secure file hosting with unique URLs</li>
+            </ul>
+        </div>
+        
+        <!-- Credits Page -->
+        <div class="page-content" id="credits-page" style="display: none;">
+            <h4>Credits</h4>
+            <div class="contact-card">
+                <h5>JOHN REESE</h5>
+                <p>Creator & Developer</p>
+                <div class="contact-info">
+                    <div>📧 fsocietycipherrevolt@gmail.com</div>
+                    <div>📱 +254745282166</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar Toggle -->
+    <button class="sidebar-toggle" id="sidebar-toggle">
+        ☰
+    </button>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Preview Modal -->
+    <div class="preview-modal" id="preview-modal">
+        <div class="preview-header">
+            <h3>Preview</h3>
+            <button type="button" class="btn" id="close-preview">✕</button>
+        </div>
+        <div class="preview-content">
+            <iframe class="preview-iframe" id="preview-iframe"></iframe>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>FSOCIETY HOSTING</h1>
+            <p>Deploy websites instantly. Upload files, paste code, or import from URL.</p>
+            <div class="description">Host your frontend files, HTML, CSS, JavaScript projects, and static websites with instant deployment and unique URLs.</div>
+        </div>
+
+        <div class="deploy-section">
+            <!-- Upload Files Section -->
+            <div class="deploy-card">
+                <h3>📁 Upload Files</h3>
+                <p>Upload HTML, CSS, JS files or complete projects</p>
+                
+                <form id="upload-form" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label>Project Name</label>
+                        <input type="text" name="projectName" class="form-control" placeholder="My Website">
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="file" id="file-upload" class="file-upload" multiple accept=".html,.css,.js,.json,.png,.jpg,.gif">
+                        <label for="file-upload" class="file-upload-label">
+                            📁 Choose Files<br>
+                            <small>Select HTML, CSS, JS, or other web files</small>
+                        </label>
+                    </div>
+                    
+                    <div class="progress" id="upload-progress">
+                        <div class="progress-bar" id="upload-progress-bar"></div>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center;">
+                        <button type="submit" class="btn" id="upload-btn">Deploy Files</button>
+                        <button type="button" class="btn btn-preview" id="upload-preview-btn">Preview</button>
+                    </div>
+                </form>
+                
+                <!-- Generated URL for Files -->
+                <div class="generated-url" id="upload-generated-url">
+                    <div class="url-label">🚀 Your website is live:</div>
+                    <a href="#" target="_blank" class="url-link" id="upload-url-link"></a>
+                </div>
+                
+                <!-- Terminal for Files -->
+                <div class="terminal" id="upload-terminal" style="display: none;">
+                    <div class="terminal-line terminal-prompt">File Upload Terminal</div>
+                    <div id="upload-terminal-content"></div>
+                </div>
+            </div>
+
+            <!-- Paste Code Section -->
+            <div class="deploy-card">
+                <h3>📝 Paste Code</h3>
+                <p>Paste HTML, CSS, or JavaScript code directly</p>
+                
+                <form id="code-form">
+                    <div class="form-group">
+                        <label>Project Name</label>
+                        <input type="text" name="projectName" class="form-control" placeholder="My Code Project">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Filename</label>
+                        <input type="text" name="filename" class="form-control" placeholder="index.html">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Code</label>
+                        <textarea name="code" class="form-control" placeholder="<!DOCTYPE html>\n<html>\n<head>\n    <title>My Site</title>\n</head>\n<body>\n    <h1>Hello World!</h1>\n</body>\n</html>" required></textarea>
+                    </div>
+                    
+                    <div class="progress" id="code-progress">
+                        <div class="progress-bar" id="code-progress-bar"></div>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center;">
+                        <button type="submit" class="btn" id="code-btn">Deploy Code</button>
+                        <button type="button" class="btn btn-preview" id="code-preview-btn">Preview</button>
+                    </div>
+                </form>
+                
+                <!-- Generated URL for Code -->
+                <div class="generated-url" id="code-generated-url">
+                    <div class="url-label">🚀 Your website is live:</div>
+                    <a href="#" target="_blank" class="url-link" id="code-url-link"></a>
+                </div>
+                
+                <!-- Terminal for Code -->
+                <div class="terminal" id="code-terminal" style="display: none;">
+                    <div class="terminal-line terminal-prompt">Code Deploy Terminal</div>
+                    <div id="code-terminal-content"></div>
+                </div>
+            </div>
+
+            <!-- Import URL Section -->
+            <div class="deploy-card">
+                <h3>🌐 Import from URL</h3>
+                <p>Import and host content from any URL</p>
+                
+                <form id="url-form">
+                    <div class="form-group">
+                        <label>Project Name</label>
+                        <input type="text" name="projectName" class="form-control" placeholder="Imported Site">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>URL</label>
+                        <input type="url" name="url" class="form-control" placeholder="https://example.com" required>
+                    </div>
+                    
+                    <div class="progress" id="url-progress">
+                        <div class="progress-bar" id="url-progress-bar"></div>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center;">
+                        <button type="submit" class="btn" id="url-btn">Import & Deploy</button>
+                        <button type="button" class="btn btn-preview" id="url-preview-btn">Preview</button>
+                    </div>
+                </form>
+                
+                <!-- Generated URL for Import -->
+                <div class="generated-url" id="url-generated-url">
+                    <div class="url-label">🚀 Your website is live:</div>
+                    <a href="#" target="_blank" class="url-link" id="url-url-link"></a>
+                </div>
+                
+                <!-- Terminal for URL Import -->
+                <div class="terminal" id="url-terminal" style="display: none;">
+                    <div class="terminal-line terminal-prompt">URL Import Terminal</div>
+                    <div id="url-terminal-content"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alerts -->
+        <div class="alert alert-success" id="success-alert">
+            <strong>Success!</strong> <span id="success-message"></span>
+        </div>
+        
+        <div class="alert alert-error" id="error-alert">
+            <strong>Error!</strong> <span id="error-message"></span>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+        <strong>Powered by JOHN REESE</strong>
+    </div>
+
+    <script>
+        // Global variables
+        let isLoggedIn = false;
+        
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeLoadingScreen();
+            initializeSidebar();
+            initializeAdminPanel();
+            initializePreview();
+            showJohnReeseAnimation();
+        });
+        
+        // Loading screen initialization
+        function initializeLoadingScreen() {
+            setTimeout(() => {
+                document.getElementById('loading-overlay').classList.add('hidden');
+            }, 2000);
+        }
+        
+        // John Reese animation
+        function showJohnReeseAnimation() {
+            setTimeout(() => {
+                const animation = document.getElementById('john-reese-animation');
+                animation.classList.add('show');
+                
+                setTimeout(() => {
+                    animation.classList.remove('show');
+                }, 3000);
+            }, 2500);
+        }
+        
+        // Sidebar functionality
+        function initializeSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const sidebarToggle = document.getElementById('sidebar-toggle');
+            const overlay = document.getElementById('overlay');
+            
+            sidebarToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('open');
+                overlay.classList.toggle('active');
+            });
+            
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('active');
+                closePreview();
+            });
+            
+            // Navigation
+            document.getElementById('nav-home').addEventListener('click', () => {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('active');
+                hideAllPages();
+            });
+            
+            document.getElementById('nav-admin').addEventListener('click', () => {
+                hideAllPages();
+                if (!isLoggedIn) {
+                    document.getElementById('admin-login').style.display = 'block';
+                    document.getElementById('admin-panel').style.display = 'none';
+                } else {
+                    document.getElementById('admin-login').style.display = 'none';
+                    document.getElementById('admin-panel').style.display = 'block';
+                    showDashboard();
+                    loadAdminStats();
+                }
+            });
+            
+            document.getElementById('nav-about').addEventListener('click', () => {
+                hideAllPages();
+                document.getElementById('about-page').style.display = 'block';
+            });
+            
+            document.getElementById('nav-credits').addEventListener('click', () => {
+                hideAllPages();
+                document.getElementById('credits-page').style.display = 'block';
+            });
+        }
+        
+        // Admin panel functionality
+        function initializeAdminPanel() {
+            document.getElementById('login-btn').addEventListener('click', handleAdminLogin);
+            document.getElementById('logout-btn').addEventListener('click', handleAdminLogout);
+            document.getElementById('view-projects-btn').addEventListener('click', showProjectsManagement);
+            document.getElementById('back-to-dashboard').addEventListener('click', showDashboard);
+        }
+        
+        function hideAllPages() {
+            document.getElementById('admin-login').style.display = 'none';
+            document.getElementById('admin-panel').style.display = 'none';
+            document.getElementById('about-page').style.display = 'none';
+            document.getElementById('credits-page').style.display = 'none';
+        }
+        
+        function showDashboard() {
+            document.getElementById('admin-dashboard').style.display = 'block';
+            document.getElementById('projects-management').style.display = 'none';
+        }
+        
+        function handleAdminLogin() {
+            const username = document.getElementById('admin-username').value;
+            const password = document.getElementById('admin-password').value;
+            
+            if (username === 'JOHNREESE' && password === 'fsociety2025') {
+                isLoggedIn = true;
+                document.getElementById('admin-login').style.display = 'none';
+                document.getElementById('admin-panel').style.display = 'block';
+                loadAdminStats();
+                showAlert('success', 'Welcome, John Reese!');
+                showJohnReeseAnimation();
+            } else {
+                showAlert('error', 'Invalid credentials');
+            }
+        }
+        
+        function handleAdminLogout() {
+            isLoggedIn = false;
+            document.getElementById('admin-login').style.display = 'block';
+            document.getElementById('admin-panel').style.display = 'none';
+            document.getElementById('admin-username').value = '';
+            document.getElementById('admin-password').value = '';
+            showAlert('success', 'Logged out successfully');
+        }
+        
+        async function loadAdminStats() {
+            try {
+                const response = await fetch('/api/admin/stats');
+                const stats = await response.json();
+                
+                document.getElementById('total-sites').textContent = stats.totalSites || 0;
+                document.getElementById('total-uploads').textContent = stats.uploads || 0;
+                document.getElementById('total-codes').textContent = stats.codes || 0;
+                document.getElementById('total-urls').textContent = stats.urls || 0;
+            } catch (error) {
+                console.error('Failed to load admin stats:', error);
+                // Set default values if API fails
+                document.getElementById('total-sites').textContent = '0';
+                document.getElementById('total-uploads').textContent = '0';
+                document.getElementById('total-codes').textContent = '0';
+                document.getElementById('total-urls').textContent = '0';
+            }
+        }
+        
+        async function showProjectsManagement() {
+            document.getElementById('admin-dashboard').style.display = 'none';
+            document.getElementById('projects-management').style.display = 'block';
+            await loadProjects();
+        }
+        
+        async function loadProjects() {
+            try {
+                const response = await fetch('/api/admin/sites');
+                const projects = await response.json();
+                
+                const projectsList = document.getElementById('projects-list');
+                
+                if (projects.length === 0) {
+                    projectsList.innerHTML = '<p style="color: #b8c6db; text-align: center;">No projects deployed yet.</p>';
+                    return;
+                }
+                
+                projectsList.innerHTML = projects.map(project => `
+                    <div class="project-item">
+                        <div class="project-header">
+                            <span class="project-name">${project.name}</span>
+                            <span class="project-type">${project.type.toUpperCase()}</span>
+                        </div>
+                        <div class="project-meta">
+                            <div>Created: ${project.created_at}</div>
+                            <div>Files: ${project.file_count} | Size: ${project.size_mb} MB</div>
+                            <div>URL: <a href="${project.url}" target="_blank" style="color: #667eea;">${project.url}</a></div>
+                        </div>
+                        <div class="project-actions">
+                            <button class="btn btn-small" onclick="window.open('${project.url}', '_blank')">View Site</button>
+                            <button class="btn btn-small btn-danger" onclick="deleteProject('${project.site_id}', '${project.name}')">Delete</button>
+                        </div>
+                    </div>
+                `).join('');
+                
+            } catch (error) {
+                console.error('Failed to load projects:', error);
+                document.getElementById('projects-list').innerHTML = '<p style="color: #e74c3c;">Failed to load projects.</p>';
+            }
+        }
+        
+        async function deleteProject(siteId, projectName) {
+            if (!confirm(`Are you sure you want to delete "${projectName}"? This action cannot be undone.`)) {
+                return;
+            }
+            
+            try {
+                const response = await fetch(`/api/site/${siteId}`, {
+                    method: 'DELETE'
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showAlert('success', `Project "${projectName}" deleted successfully`);
+                    await loadProjects();
+                    await loadAdminStats();
+                } else {
+                    showAlert('error', 'Failed to delete project');
+                }
+                
+            } catch (error) {
+                console.error('Delete project error:', error);
+                showAlert('error', 'Failed to delete project');
+            }
+        }
+        
+        // Preview functionality
+        function initializePreview() {
+            document.getElementById('upload-preview-btn').addEventListener('click', () => previewFiles('upload'));
+            document.getElementById('code-preview-btn').addEventListener('click', () => previewCode());
+            document.getElementById('url-preview-btn').addEventListener('click', () => previewUrl());
+            document.getElementById('close-preview').addEventListener('click', closePreview);
+        }
+        
+        function previewFiles(section) {
+            const files = document.getElementById('file-upload').files;
+            if (files.length === 0) {
+                showAlert('error', 'Please select files to preview');
+                return;
+            }
+            
+            const htmlFiles = Array.from(files).filter(f => f.name.endsWith('.html'));
+            if (htmlFiles.length === 0) {
+                showAlert('error', 'Please select at least one HTML file to preview');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const modal = document.getElementById('preview-modal');
+                const iframe = document.getElementById('preview-iframe');
+                const overlay = document.getElementById('overlay');
+                
+                const blob = new Blob([e.target.result], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
+                
+                iframe.src = url;
+                modal.classList.add('active');
+                overlay.classList.add('active');
+            };
+            reader.readAsText(htmlFiles[0]);
+        }
+        
+        function previewCode() {
+            const code = document.querySelector('#code-form textarea[name="code"]').value;
+            if (!code.trim()) {
+                showAlert('error', 'Please enter code to preview');
+                return;
+            }
+            
+            const modal = document.getElementById('preview-modal');
+            const iframe = document.getElementById('preview-iframe');
+            const overlay = document.getElementById('overlay');
+            
+            const blob = new Blob([code], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            
+            iframe.src = url;
+            modal.classList.add('active');
+            overlay.classList.add('active');
+        }
+        
+        function previewUrl() {
+            const url = document.querySelector('#url-form input[name="url"]').value;
+            if (!url.trim()) {
+                showAlert('error', 'Please enter a URL to preview');
+                return;
+            }
+            
+            const modal = document.getElementById('preview-modal');
+            const iframe = document.getElementById('preview-iframe');
+            const overlay = document.getElementById('overlay');
+            
+            iframe.src = url;
+            modal.classList.add('active');
+            overlay.classList.add('active');
+        }
+        
+        function closePreview() {
+            const modal = document.getElementById('preview-modal');
+            const overlay = document.getElementById('overlay');
+            const iframe = document.getElementById('preview-iframe');
+            
+            modal.classList.remove('active');
+            if (!document.getElementById('sidebar').classList.contains('open')) {
+                overlay.classList.remove('active');
+            }
+            iframe.src = '';
+        }
+        
+        // Utility functions
+        function showAlert(type, message) {
+            const alertElement = document.getElementById(type + '-alert');
+            const messageElement = document.getElementById(type + '-message');
+            messageElement.textContent = message;
+            alertElement.style.display = 'block';
+            
+            setTimeout(() => {
+                alertElement.style.display = 'none';
+            }, 5000);
+        }
+        
+        function showProgress(formId) {
+            const progress = document.getElementById(formId + '-progress');
+            const progressBar = document.getElementById(formId + '-progress-bar');
+            
+            progress.style.display = 'block';
+            progressBar.style.width = '0%';
+            
+            // Simulate progress
+            let width = 0;
+            const interval = setInterval(() => {
+                width += Math.random() * 20;
+                if (width > 90) width = 90;
+                progressBar.style.width = width + '%';
+            }, 200);
+            
+            return interval;
+        }
+        
+        function hideProgress(formId, interval) {
+            const progress = document.getElementById(formId + '-progress');
+            const progressBar = document.getElementById(formId + '-progress-bar');
+            
+            clearInterval(interval);
+            progressBar.style.width = '100%';
+            
+            setTimeout(() => {
+                progress.style.display = 'none';
+            }, 1000);
+        }
+        
+        function addTerminalLog(section, message) {
+            const terminal = document.getElementById(section + '-terminal');
+            const content = document.getElementById(section + '-terminal-content');
+            
+            terminal.style.display = 'block';
+            
+            const line = document.createElement('div');
+            line.className = 'terminal-line';
+            line.textContent = message;
+            content.appendChild(line);
+            
+            terminal.scrollTop = terminal.scrollHeight;
+        }
+        
+        function showGeneratedUrl(section, url) {
+            const urlDiv = document.getElementById(section + '-generated-url');
+            const urlLink = document.getElementById(section + '-url-link');
+            
+            urlLink.href = url;
+            urlLink.textContent = url;
+            urlDiv.style.display = 'block';
+        }
+        
+        // File upload handling
+        document.getElementById('file-upload').addEventListener('change', function(e) {
+            const files = Array.from(e.target.files);
+            const label = document.querySelector('.file-upload-label');
+            
+            if (files.length > 0) {
+                const fileNames = files.map(f => f.name).join(', ');
+                label.innerHTML = `📁 ${files.length} file(s) selected<br><small>${fileNames}</small>`;
+            }
+        });
+        
+        // Upload form handling
+        document.getElementById('upload-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const files = document.getElementById('file-upload').files;
+            
+            if (files.length === 0) {
+                showAlert('error', 'Please select files to upload');
+                return;
+            }
+            
+            // Append files to formData
+            for (let file of files) {
+                formData.append('files', file);
+            }
+            
+            const btn = document.getElementById('upload-btn');
+            btn.disabled = true;
+            btn.textContent = 'Deploying...';
+            
+            const progressInterval = showProgress('upload');
+            addTerminalLog('upload', 'Starting file upload...');
+            
+            try {
+                const response = await fetch('/api/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    addTerminalLog('upload', `Files deployed successfully!`);
+                    addTerminalLog('upload', `Site URL: ${result.url}`);
+                    showAlert('success', 'Files deployed successfully!');
+                    showGeneratedUrl('upload', result.url);
+                    this.reset();
+                    document.querySelector('.file-upload-label').innerHTML = '📁 Choose Files<br><small>Select HTML, CSS, JS, or other web files</small>';
+                } else {
+                    throw new Error(result.error || 'Upload failed');
+                }
+                
+            } catch (error) {
+                addTerminalLog('upload', `Upload failed: ${error.message}`);
+                showAlert('error', error.message);
+            } finally {
+                hideProgress('upload', progressInterval);
+                btn.disabled = false;
+                btn.textContent = 'Deploy Files';
+            }
+        });
+        
+        // Code form handling
+        document.getElementById('code-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = {
+                projectName: formData.get('projectName'),
+                filename: formData.get('filename') || 'index.html',
+                code: formData.get('code')
+            };
+            
+            const btn = document.getElementById('code-btn');
+            btn.disabled = true;
+            btn.textContent = 'Deploying...';
+            
+            const progressInterval = showProgress('code');
+            addTerminalLog('code', 'Deploying code...');
+            
+            try {
+                const response = await fetch('/api/deploy-code', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    addTerminalLog('code', `Code deployed successfully!`);
+                    addTerminalLog('code', `Site URL: ${result.url}`);
+                    showAlert('success', 'Code deployed successfully!');
+                    showGeneratedUrl('code', result.url);
+                    this.reset();
+                } else {
+                    throw new Error(result.error || 'Deployment failed');
+                }
+                
+            } catch (error) {
+                addTerminalLog('code', `Code deployment failed: ${error.message}`);
+                showAlert('error', error.message);
+            } finally {
+                hideProgress('code', progressInterval);
+                btn.disabled = false;
+                btn.textContent = 'Deploy Code';
+            }
+        });
+        
+        // URL form handling
+        document.getElementById('url-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = {
+                projectName: formData.get('projectName'),
+                url: formData.get('url')
+            };
+            
+            const btn = document.getElementById('url-btn');
+            btn.disabled = true;
+            btn.textContent = 'Importing...';
+            
+            const progressInterval = showProgress('url');
+            addTerminalLog('url', `Importing from: ${data.url}`);
+            
+            try {
+                const response = await fetch('/api/deploy-url', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    addTerminalLog('url', `URL imported successfully!`);
+                    addTerminalLog('url', `Site URL: ${result.url}`);
+                    showAlert('success', 'URL imported successfully!');
+                    showGeneratedUrl('url', result.url);
+                    this.reset();
+                } else {
+                    throw new Error(result.error || 'Import failed');
+                }
+                
+            } catch (error) {
+                addTerminalLog('url', `URL import failed: ${error.message}`);
+                showAlert('error', error.message);
+            } finally {
+                hideProgress('url', progressInterval);
+                btn.disabled = false;
+                btn.textContent = 'Import & Deploy';
+            }
+        });
+        
+        // Format bytes utility
+        function formatBytes(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+    </script>
+</body>
+</html>
